@@ -28,7 +28,7 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 # 
 
-base_folder="~/work/site/website"
+base_folder="/home/gv32/work/site/website"
 log_file="git.log"
 
 pull_the_stuff(){
