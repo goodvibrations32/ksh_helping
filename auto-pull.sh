@@ -45,6 +45,7 @@ pull_the_stuff(){
 	print -u3 "Pulling files from the repo..."
 	git_output=$(/usr/local/bin/git pull -v   2>&1)
 
+	doas rm /var/www/htdocs/awfulbytes.org/@([a-z]*html)
 	doas cp generated/@([4-5]*html) /var/www/errdocs
 	doas cp generated/@([a-z]*html|*css) /var/www/htdocs/awfulbytes.org
 	exit
