@@ -32,29 +32,28 @@ base_folder="/home/gv32/work/site/website"
 log_file="git.log"
 
 pull_the_stuff(){
-    cd $base_folder
-
-    exec 3> $log_file
-    print -u3 "$(date)"
-    /usr/local/bin/git fetch
-    fetch_and_record_files=$(/usr/local/bin/git diff --name-only ..origin)
+	$base_folder
+    	exec 3> $log_file
+    	print -u3 "$(date)"
+    	/usr/local/bin/git fetch
+    	fetch_and_record_files=$(/usr/local/bin/git diff --name-only ..origin)
     
-    if [ "$fetch_and_record_files" -eq 0 ]; then
-	git_output="No files need to be updated"
-    else
-	print -u3 "Pulling files from the repo..."
-	git_output=$(/usr/local/bin/git pull -v   2>&1)
+    	if [ "$fetch_and_record_files" -eq 0 ]; then
+		git_output="No files need to be updated"
+    	else
+		print -u3 "Pulling files from the repo..."
+		git_output=$(/usr/local/bin/git pull -v   2>&1)
 
-	doas rm /var/www/htdocs/awfulbytes.org/@([a-z]*html)
-	doas cp generated/@([4-5]*html) /var/www/errdocs
-	doas cp generated/@([a-z]*html|*css) /var/www/htdocs/awfulbytes.org
-	exit
-     fi
+		doas rm /var/www/htdocs/awfulbytes.org/@([a-z]*html)
+		doas cp generated/@([4-5]*html) /var/www/errdocs
+		doas cp generated/@([a-z]*html|*css) /var/www/htdocs/awfulbytes.org
+		exit
+     	fi
 
-    print -u3 $fetch_and_record_files
-    exec 3>&-
+    	print -u3 $fetch_and_record_files
+    	exec 3>&-
     
-    cd ~/
+    	cd ~/
 }
 
 pull_the_stuff
